@@ -1,18 +1,22 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<title>Sign Up / Log In</title>
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 
 
-
 <body>
-
+<h1>Register</h1>
 <div class="test"> 
-  <form action="welcome.php" method="post">
-    Name: <input type="text" name="name"><br>
-    Email: <input type="text" name="email"><br>
-    <input type="submit">
+  <form action="register.php" method="POST">
+    <input type="text" name="first" placeholder="First Name" autocomplete="off"><br>
+    <input type="text" name="last" placeholder="Last Name" autocomplete="off"><br>
+    <input type="text" name="uid" placeholder="Username" autocomplete="off"><br>
+    <input type="password" name="pwd" placeholder="Password"><br>
+    <button type="submit">Register</button>
   </form>
 </div>
 
