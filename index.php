@@ -14,9 +14,10 @@
   <form action="register.php" method="POST">
     <input type="text" name="first" placeholder="First Name" autocomplete="off"><br>
     <input type="text" name="last" placeholder="Last Name" autocomplete="off"><br>
+    <input type="text" name="email" placeholder="Email" autocomplete="off"><br>
     <input type="text" name="uid" placeholder="Username" autocomplete="off"><br>
     <input type="password" name="pwd" placeholder="Password"><br>
-    <button type="submit">Register</button>
+    <button type="submit" name="register">Register</button>
   </form>
 </div>
 
