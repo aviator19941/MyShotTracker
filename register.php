@@ -6,13 +6,14 @@ session_start();
 $_SESSION['first'] = $_POST['first'];
 $_SESSION['last'] = $_POST['last'];
 $_SESSION['email'] = $_POST['email'];
+$_SESSION['uid'] = $_POST['uid'];
 
 $first = $_POST['first'];
 $last = $_POST['last'];
 $email = $_POST['email'];
 $uid = $_POST['uid'];
-$pwd = $_POST['pwd'];
-$hash = password_hash($pwd, PASSWORD_DEFAULT);
+$pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+$hash = hash('SHA512', $pwd);
 
 // Require all fields to register
 if (empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd) || empty($hash)) {
@@ -71,6 +72,36 @@ if (!isset($error)) {
 		// Securely insert into table
 		$sql = "INSERT INTO users (first, last, email, uid, pwd, hash) VALUES (:first,:last,:email,:uid,:pwd,:hash)";
 		$query = $pdo->prepare($sql);
+
+		if ($query) {
+
+	        $_SESSION['active'] = 0; //0 until user activates their account with verify.php
+	        $_SESSION['logged_in'] = true; // So we know the user has logged in
+	        $_SESSION['message'] =
+	                
+	                 "Confirmation link has been sent to $email, please verify
+	                 your account by clicking on the link in the message!";
+
+	        // Send registration confirmation link (verify.php)
+	        $to      = $email;
+	        $subject = 'Account Verification ( MyShotTracker.com )';
+	        $message_body = '
+	        Hello '.$first.',
+
+	        Thank you for signing up!
+
+	        Please click this link to activate your account:
+
+	        http://localhost:1234/MyShotTracker/verify.php?email='.$email.'&hash='.$hash;  
+
+	        mail($to, $subject, $message_body);
+
+	        header("location: profile.php"); 
+	    }
+	    else {
+	        $_SESSION['error'] = 'Registration failed!';
+	        header("location: error.php");
+	    }
 
 		$query->execute(array(
 			':first' => $first,
