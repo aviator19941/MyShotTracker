@@ -8,7 +8,7 @@ session_start();
 <html>
 <head>
 	<title>Sign Up / Log In</title>
-	<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 
 <?php 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" required autocomplete="off" name="password"/>
+            <input type="password" required autocomplete="off" name="pwd"/>
           </div>
           
           <p class="forgot"><a href="forgot.php">Forgot Password?</a></p>
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 </div> <!-- /form -->
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-    <script src="js/index.js"></script>
+  <script src="js/index.js"></script>
 
 </body>
 </html>

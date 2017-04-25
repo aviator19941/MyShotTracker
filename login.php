@@ -14,41 +14,28 @@ if ($usercheck->rowCount() == 0) {
 }
 else {
 	// User exists
-	echo "User exists!<br \>";
 	$result = $usercheck->fetchAll();
+	//print_r($result[0]['first']);
+	$verify = password_verify($_POST['pwd'], $result[0]['pwd']);
 
-	foreach( $result as $row ) {
-    	echo $row['first']."<br \>";
-    	echo $row['last']."<br \>";
-	}
-
-}
-
-/*if ($usercheck->rowCount() == 0) {
-	// User doesn't exist
-	$_SESSION['error'] = "User with that username doesn't exist!";
-	header('location: error.php');
-}
-else {
-	// User exists
-	$pwdhash = $usercheck->fetchAll();
-	if ( password_verify($_POST['pwd'], $pwdhash) ) {
-        
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['first'] = $user['first'];
-        $_SESSION['last'] = $user['last'];
-        $_SESSION['active'] = $user['active'];
+	if($verify) {
+	    $_SESSION['email'] = $result[0]['email'];
+        $_SESSION['uid'] = $result[0]['uid'];
+        $_SESSION['first'] = $result[0]['first'];
+        $_SESSION['last'] = $result[0]['last'];
+        $_SESSION['active'] = $result[0]['active'];
         
         // This is how we'll know the user is logged in
         $_SESSION['logged_in'] = true;
 
         header("location: profile.php");
-    }
-    else {
-        $_SESSION['error'] = "You have entered wrong password, try again!";
+	}
+	else {
+	    $_SESSION['error'] = "You have entered wrong password, try again!";
         header("location: error.php");
-    }
-}*/
+	}
+
+}
 
 
 ?>
