@@ -12,11 +12,12 @@ if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !
 	$hash = $_GET['hash'];
 
 	// Select user with matching email and hash, who hasn't verified their account yet (active = 0)
-	$query = $pdo->prepare("SELECT * FROM users WHERE email = :email AND hash = :hash AND active='0'");
+	$query = $pdo->prepare("SELECT * FROM users WHERE email = :email AND hash = :hash AND active=0");
 	$query->bindParam(':email', $email);
 	$query->bindParam(':hash', $hash);
+    $query->execute();
 
-	if ( $query->num_rows == 0 ) { 
+	if ( $query->rowCount() == 0 ) { 
         $_SESSION['error'] = "Account has already been activated or the URL is invalid!";
 
         header("location: error.php");
@@ -25,7 +26,7 @@ if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !
         $_SESSION['message'] = "Your account has been activated!";
         
         // Set the user status to active (active = 1)
-        $updatequery = $pdo->prepare("UPDATE users SET active='1' WHERE email = :email");
+        $updatequery = $pdo->prepare("UPDATE users SET active=1 WHERE email = :email");
         $updatequery->bindParam(':email', $email);
         $updatequery->execute();
         $_SESSION['active'] = 1;

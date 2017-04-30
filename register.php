@@ -1,7 +1,7 @@
 <?php
 
 include 'db.php';
-session_start();
+//session_start();
 
 $_SESSION['first'] = $_POST['first'];
 $_SESSION['last'] = $_POST['last'];
@@ -52,10 +52,6 @@ else {
 	if (isset($error)) {
 		header('location: error.php');
 	}
-	else {
-		//change to verify.php 
-		header('location: index.php');
-	}
 
 }
 // No error
@@ -84,7 +80,7 @@ if (!isset($error)) {
 
 	        // Send registration confirmation link (verify.php)
 	        $to      = $email;
-	        $subject = 'Account Verification ( MyShotTracker.com )';
+	        $subject = 'Account Verification (MyShotTracker.com)';
 	        $message_body = '
 	        Hello '.$first.',
 
@@ -92,11 +88,24 @@ if (!isset($error)) {
 
 	        Please click this link to activate your account:
 
-	        http://localhost:1234/MyShotTracker/verify.php?email='.$email.'&hash='.$hash;  
+	        https://myshottracker.000webhostapp.com/verify.php?email='.$email.'&hash='.$hash;
 
-	        mail($to, $subject, $message_body);
+	        $headers = "From: " . $email . "\n";
+			$headers .= "Reply-To: " . $email . "\n";
 
-	        header("location: profile.php"); 
+			ini_set("sendmail_from", $email);
+
+			$sent = mail($to, $subject, $message_body, $headers, "-f" .$email);
+
+			if ($sent) {
+				header("location: profile.php"); 
+
+			}
+			else {
+				$_SESSION['error'] = 'Email failed to send!';
+				header("location: error.php");
+			}
+
 	    }
 	    else {
 	        $_SESSION['error'] = 'Registration failed!';

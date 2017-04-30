@@ -6,8 +6,6 @@ session_start();
 // Check if form submitted with method="post"
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) 
 {   
-    //$email = $mysqli->escape_string($_POST['email']);
-    //$result = $mysqli->query("SELECT * FROM users WHERE email='$email'");
     $email = $_POST['email'];
     $sql = "SELECT * FROM users WHERE email = :email";
     $result = $pdo->prepare($sql);
@@ -19,7 +17,43 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
         header("location: error.php"); 
     }
     else { // User exists
-        echo "User exists!";
+        $user = $result->fetchAll(); // $user becomes array with user data
+        
+        $email = $user[0]['email'];
+        $hash = $user[0]['hash'];
+        $first = $user[0]['first'];
+
+        // Session message to display on success.php
+        $_SESSION['message'] = "<p>Please check your email <span>$email</span>"
+        . " for a confirmation link to complete your password reset!</p>";
+
+        // Send registration confirmation link (reset.php)
+        $to      = $email;
+        $subject = 'Password Reset Link';
+        $message_body = '
+        Hello '.$first.',
+
+        You have requested password reset!
+
+        Please click this link to reset your password:
+
+        https://myshottracker.000webhostapp.com/reset.php?email='.$email.'&hash='.$hash;
+
+        $headers = "From: " . $email . "\n";
+        $headers .= "Reply-To: " . $email . "\n";
+
+        ini_set("sendmail_from", $email);
+
+        $sent = mail($to, $subject, $message_body, $headers, "-f" .$email);
+
+        if ($sent) {
+          header("location: success.php"); 
+
+        }
+        else {
+          $_SESSION['error'] = 'Email failed to send!';
+          header("location: error.php");
+        }
     }
     
    
