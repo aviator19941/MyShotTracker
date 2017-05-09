@@ -1,5 +1,6 @@
 <?php
 /* Displays user information and some useful messages */
+require 'db.php';
 session_start();
 
 // Check if user is logged in using the session variable
@@ -13,8 +14,11 @@ else {
     $last = $_SESSION['last'];
     $email = $_SESSION['email'];
     $active = $_SESSION['active'];
+    $sql = "SELECT * FROM stats";
+
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,19 +48,34 @@ else {
           
           <?php
           
-          // Keep reminding the user this account is not active, until they activate
-          if ( !$active ){
-              echo
-              '<div class="info">
-              Account is unverified, please confirm your email by clicking
-              on the email link!
-              </div>';
-          }
+            // Keep reminding the user this account is not active, until they activate
+            if ( !$active ){
+                echo
+                '<div class="info">
+                Account is unverified, please confirm your email by clicking
+                on the email link!
+                </div>';
+            }
           
           ?>
           
           <h2><?php echo $first.' '.$last; ?></h2>
           <p><?= $email ?></p>
+
+          <table width="100%" border="1" cellpadding="1" cellspacing="1">
+            <tr>
+              
+              <th>Golf Course</th>
+              <th>Score</th>
+              <th>Fairways</th>
+              <th>GIRs</th>
+              <th>Sand Saves</th>
+              <th>Up & Downs</th>
+              <th>Putts</th>
+
+            </tr>
+
+          </table>
           
           <a href="logout.php"><button class="button button-block" name="logout"/>Log Out</button></a>
 

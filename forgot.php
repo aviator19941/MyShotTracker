@@ -29,7 +29,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
 
         // Send registration confirmation link (reset.php)
         $to      = $email;
-        $subject = 'Password Reset Link';
+        $subject = 'Password Reset Link (MyShotTracker.com)';
         $message_body = '
         Hello '.$first.',
 
@@ -76,7 +76,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
       <label>
         Email Address<span class="req">*</span>
       </label>
-      <input type="email"required autocomplete="off" name="email"/>
+      <input type="text" required autocomplete="off" name="email"/>
     </div>
     <button class="button button-block"/>Reset</button>
     </form>

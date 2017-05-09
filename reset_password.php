@@ -3,6 +3,7 @@
 require 'db.php';
 session_start();
 
+
 // Make sure the form is being submitted with method="post"
 if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
@@ -31,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
     else {
-        $_SESSION['message'] = "Two passwords you entered don't match, try again!";
-        header("location: error.php");    
+        $_SESSION['error'] = "The two passwords you entered don't match, try again!";
+        header("location: error.php"); 
     }
 
 }

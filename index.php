@@ -7,7 +7,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Sign Up / Log In</title>
+	<title>Register / Log In</title>
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 
@@ -31,15 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <body>
   <div class="form">
       
-      <ul class="tab-group">
-        <li class="tab"><a href="#signup">Sign Up</a></li>
-        <li class="tab active"><a href="#login">Log In</a></li>
-      </ul>
-      
-      <div class="tab-content">
 
          <div id="login">   
-          <h1>Welcome Back!</h1>
+          <h1>Login</h1>
           
           <form action="index.php" method="post" autocomplete="off">
           
@@ -47,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <label>
               Username<span class="req">*</span>
             </label>
-            <input type="username" required autocomplete="off" name="uid"/>
+            <input type="text" required autocomplete="off" name="uid"/>
           </div>
           
           <div class="field-wrap">
@@ -59,14 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           
           <p class="forgot"><a href="forgot.php">Forgot Password?</a></p>
           
-          <button class="button button-block" name="login" />Log In</button>
+          <button class="button button-block" name="login" >Log In</button>
           
           </form>
 
         </div>
           
         <div id="signup">   
-          <h1>Sign Up for Free</h1>
+          <h1>Register for Free!</h1>
           
           <form action="index.php" method="post" autocomplete="off">
           
@@ -82,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               <label>
                 Last Name<span class="req">*</span>
               </label>
-              <input type="text"required autocomplete="off" name='last' />
+              <input type="text" required autocomplete="off" name='last' />
             </div>
           </div>
 
@@ -90,30 +84,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off" name='email' />
+            <input type="text" required autocomplete="off" name='email' />
           </div>
           
           <div class="field-wrap">
             <label>
               Create Username<span class="req">*</span>
             </label>
-            <input type="username"required autocomplete="off" name='uid'/>
+            <input type="text" required autocomplete="off" name='uid'/>
           </div>
 
           <div class="field-wrap">
             <label>
               Set A Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off" name='pwd'/>
+            <input type="password" required autocomplete="off" name='pwd'/>
           </div>
           
-          <button type="submit" class="button button-block" name="register" />Register</button>
+          <button type="submit" class="button button-block" name="register" >Register</button>
           
           </form>
 
         </div>  
         
-      </div><!-- tab-content -->
       
 </div> <!-- /form -->
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

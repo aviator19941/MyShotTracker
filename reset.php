@@ -46,27 +46,40 @@ else {
             <label>
               New Password<span class="req">*</span>
             </label>
-            <input type="password"required name="newpassword" autocomplete="off"/>
+            <input type="password" required name="newpassword" id="newpassword" onkeyup="check()" autocomplete="off"/>
           </div>
               
           <div class="field-wrap">
             <label>
               Confirm New Password<span class="req">*</span>
             </label>
-            <input type="password"required name="confirmpassword" autocomplete="off"/>
+            <input type="password" required name="confirmpassword" id="confirmpassword" onkeyup="check()" autocomplete="off"/>
+            <span id='message'></span>
           </div>
           
           <!-- This input field is needed, to get the email of the user -->
           <input type="hidden" name="email" value="<?= $email ?>">    
           <input type="hidden" name="hash" value="<?= $hash ?>">    
               
-          <button class="button button-block"/>Apply</button>
+          <button class="button button-block" onclick="alertBox()">Apply</button>
           
           </form>
 
     </div>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="js/index.js"></script>
+<script>
+var check = function() {
+  if (document.getElementById('newpassword').value ==
+    document.getElementById('confirmpassword').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Matching';
+  } 
+  else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Not matching, make sure passwords match!';
+  }
+}
 
+</script>
 </body>
 </html>
