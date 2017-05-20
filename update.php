@@ -28,10 +28,14 @@ if ($status == "disp") {
 	      echo "<td>"; ?><div id="putts<?php echo $row["id"]; ?>"> <?php echo $row['putts']; ?> <?php echo "</td>";*/
 	      
 
-	      echo "<td>"; ?> <input type="button" id="<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="delete" onClick="delete1(this.id)"> <?php echo "</td>";
 	      echo "<td>"; ?> 
-	      <input type="button" id="<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="edit" onClick="editRow(this.id)"> 
-	      <input type="button" id="update<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="update" style="visibility: hidden" onClick="updateRow(this.name)"> 
+	      <input type="button" id="<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="edit" onclick="editRow(this.id)"> 
+
+	      <input type="button" id="<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="delete" onclick="delete1(this.id)">
+	      
+	      <?php echo "</td>";
+	      echo "<td>"; ?> 
+	      <input type="button" id="update<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="update" style="visibility: hidden" onclick="updateRow(this.name)"> 
 
 
 
@@ -71,6 +75,19 @@ if ($status == "delete") {
 	$query->bindParam(':id', $id);
 	$query->execute();
 
+}
+
+if ($status == "insert") {
+	$gc = $_GET["gc"];
+	$score = $_GET["score"];
+	$uid = $_SESSION['uid'];
+
+	$sql = "INSERT INTO stats (golfcourse, score, uid) VALUES (:gc, :score, :uid)";
+	$query = $pdo->prepare($sql);
+	$query->bindParam(':gc', $gc);
+	$query->bindParam(':score', $score);
+	$query->bindParam(':uid', $uid);
+	$query->execute();
 }
 
 

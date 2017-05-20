@@ -66,8 +66,13 @@ else {
 
   </div>
 
-<div id="disp_data"></div>
+<form name="form1" action="" method="post">
+  <div id="disp_data"></div>
 
+  <input type="text" id="txtgolfcourseins" placeholder="Golf Course">
+  <input type="text" id="txtscoreins" placeholder="Score">
+  <input type="button" id="but1" value="insert" onclick="insert();">
+</form>
 
 <a href="logout.php"><button class="button button-block" name="logout"/>Log Out</button></a>
 
@@ -81,7 +86,17 @@ else {
     document.getElementById("disp_data").innerHTML=xmlhttp.responseText;
   }
 
+  function toggle(up) {
+    var x = document.getElementById(up);
+    if (x.style.visibility === 'hidden') {
+        x.style.visibility = 'visible';
+    } else {
+        x.style.visibility = 'hidden';
+    }
+  }
+
   function editRow(val) {
+
     golfcourseid = "golfcourse"+val;
     txtgolfcourseid = "txtgolfcourse"+val;
     var golfcourse = document.getElementById(golfcourseid).innerHTML;
@@ -94,9 +109,8 @@ else {
 
 
     updateid = "update"+val;
-    document.getElementById(val).style.visibility="hidden";
-    document.getElementById(updateid).style.visibility="visible";
-
+    toggle(val);
+    toggle(updateid);
   }
 
 
@@ -110,9 +124,9 @@ else {
 
     update_value(b,golfcourse,score);
 
-    document.getElementById(b).style.visibility="visible";
-    document.getElementById("update"+b).style.visibility="hidden";
-
+    updateid="update"+b;
+    toggle(b);
+    toggle(updateid);
 
     document.getElementById("golfcourse"+b).innerHTML=golfcourse;
     document.getElementById("score"+b).innerHTML=score;
@@ -130,6 +144,19 @@ else {
     xmlhttp.open("GET", "update.php?id="+id+"&status=delete",false);
     xmlhttp.send(null);
     disp_data();
+  }
+
+  function insert() {
+    var gc = document.getElementById("txtgolfcourseins").value;
+    var score = document.getElementById("txtscoreins").value;
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "update.php?gc="+gc+"&score="+score+"&status=insert",false);
+    xmlhttp.send(null);
+    disp_data();
+
+    document.getElementById("txtgolfcourseins").value = "";
+    document.getElementById("txtscoreins").value = "";
   }
 
 </script>
