@@ -109,7 +109,9 @@ else {
 
 
     updateid = "update"+val;
+    deleteid = "delete"+val;
     toggle(val);
+    document.getElementById(deleteid).style.visibility = 'hidden';
     toggle(updateid);
   }
 
@@ -125,7 +127,9 @@ else {
     update_value(b,golfcourse,score);
 
     updateid="update"+b;
+    deleteid="delete"+b;
     toggle(b);
+    document.getElementById(deleteid).style.visibility = 'visible';
     toggle(updateid);
 
     document.getElementById("golfcourse"+b).innerHTML=golfcourse;
@@ -139,7 +143,7 @@ else {
     xmlhttp.send(null);
   }
 
-  function delete1(id) {
+  function deleteRow(id) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "update.php?id="+id+"&status=delete",false);
     xmlhttp.send(null);
