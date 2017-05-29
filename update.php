@@ -29,9 +29,9 @@ if ($status == "disp") {
 	      
 
 	      echo "<td>"; ?> 
-	      <input type="button" id="<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="edit" onclick="editRow(this.id)"> 
+	      <input type="button" id="edit<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="edit" onclick="editRow(this.name)"> 
 
-	      <input type="button" id="delete<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="delete" onclick="deleteRow(this.id)">
+	      <input type="button" id="delete<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="delete" onclick="deleteRow(this.name)">
 	      
 	      <?php echo "</td>";
 	      echo "<td>"; ?> 

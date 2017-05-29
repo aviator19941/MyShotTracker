@@ -109,9 +109,10 @@ else {
 
 
     updateid = "update"+val;
+    editid = "edit"+val;
     deleteid = "delete"+val;
-    toggle(val);
-    document.getElementById(deleteid).style.visibility = 'hidden';
+    toggle(editid);
+    toggle(deleteid);
     toggle(updateid);
   }
 
@@ -126,10 +127,11 @@ else {
 
     update_value(b,golfcourse,score);
 
-    updateid="update"+b;
-    deleteid="delete"+b;
-    toggle(b);
-    document.getElementById(deleteid).style.visibility = 'visible';
+    updateid = "update"+b;
+    editid = "edit"+b;
+    deleteid = "delete"+b;
+    toggle(editid);
+    toggle(deleteid);
     toggle(updateid);
 
     document.getElementById("golfcourse"+b).innerHTML=golfcourse;
