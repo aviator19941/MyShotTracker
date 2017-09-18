@@ -74,8 +74,9 @@ else {
   <input type="text" id="txtfairwaysins" placeholder="Fairways">
   <input type="text" id="txtgirins" placeholder="GIR's">
   <input type="text" id="txtsandsavesins" placeholder="Sand Saves">
-  <input type="text" id="txtupanddownsins" placeholder="Up and Downs">
+  <input type="text" id="txtupanddownsins" placeholder="Up & Downs">
   <input type="text" id="txtputtsins" placeholder="Putts">
+
   <input type="button" id="but1" value="insert" onclick="insert();">
 </form>
 
@@ -210,8 +211,8 @@ else {
     var putts = document.getElementById("txtputtsins").value;
 
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "update.php?gc="+gc+"&score="+score+"&fairways="+fairways+
-      "&sandsaves="+sandsaves+"&gir="+gir+"&upanddowns="+upanddowns+"$putts="+putts+"&status=insert",false);
+    xmlhttp.open("GET", "update.php?gc="+gc+"&score="+score+"&fairways="+fairways+"&gir="+gir+
+      "&sandsaves="+sandsaves+"&upanddowns="+upanddowns+"&putts="+putts+"&status=insert",false);
     xmlhttp.send(null);
     disp_data();
 

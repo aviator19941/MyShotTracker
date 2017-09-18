@@ -14,10 +14,17 @@ if ($status == "disp") {
 
 
 	echo "<table>";
+	echo "<tr>";
+	echo "<th>Golf Course</th>";
+	echo "<th>Score</th>";
+	echo "<th>Fairways</th>";
+	echo "<th>GIR's</th>";
+	echo "<th>Sand Saves</th>";
+	echo "<th>Up & Downs</th>";
+	echo "<th>Putts</th>";
 	while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
 	    if ($uid == $row['uid']) {
 	      echo "<tr>";
-	      
 
 	      echo "<td>"; ?><div id="golfcourse<?php echo $row["id"]; ?>"> <?php echo $row['golfcourse']; ?> </div> <?php echo "</td>";
 	      echo "<td>"; ?><div id="score<?php echo $row["id"]; ?>"> <?php echo $row['score']; ?> </div> <?php echo "</td>";
@@ -102,6 +109,8 @@ if ($status == "insert") {
 	$putts = $_GET["putts"];
 	$uid = $_SESSION['uid'];
 
+	//$sql = "INSERT INTO stats (golfcourse, score, fairways, gir, sandsaves, upanddowns, putts, uid) 
+	//VALUES (:gc, :score, :fairways, :gir, :sandsaves, :upanddowns, :putts, :uid)";
 	$sql = "INSERT INTO stats (golfcourse, score, fairways, gir, sandsaves, upanddowns, putts, uid) 
 	VALUES (:gc, :score, :fairways, :gir, :sandsaves, :upanddowns, :putts, :uid)";
 	$query = $pdo->prepare($sql);
