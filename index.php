@@ -7,8 +7,8 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Register / Log In</title>
-	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<title>MyShotTracker - Log In or Register</title>
+	<link rel="stylesheet" type="text/css" href="login.css" />
 </head>
 
 <?php 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       
 
          <div id="login">   
-          <h1>Login</h1>
+          <h1>Login to MyShotTracker</h1>
           
           <form action="index.php" method="post" autocomplete="off">
           
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         </div>
           
         <div id="signup">   
-          <h1>Register for Free!</h1>
+          <h1>Register for Free</h1>
           
           <form action="index.php" method="post" autocomplete="off">
           

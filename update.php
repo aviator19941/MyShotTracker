@@ -13,26 +13,26 @@ if ($status == "disp") {
 	$query->execute();
 
 
-	echo "<table>";
+	echo "<table style=\"border-collapse: collapse;\">";
 	echo "<tr>";
-	echo "<th>Golf Course</th>";
-	echo "<th>Score</th>";
-	echo "<th>Fairways</th>";
-	echo "<th>GIR's</th>";
-	echo "<th>Sand Saves</th>";
-	echo "<th>Up & Downs</th>";
-	echo "<th>Putts</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">Golf Course</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">Score</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">Fairways</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">GIR's</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">Sand Saves</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">Up & Downs</th>";
+	echo "<th style=\"text-align: left; background-color: #4CAF50; color: white; padding: 8px; border: 1px solid black;\">Putts</th>";
 	while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
 	    if ($uid == $row['uid']) {
 	      echo "<tr>";
 
-	      echo "<td>"; ?><div id="golfcourse<?php echo $row["id"]; ?>"> <?php echo $row['golfcourse']; ?> </div> <?php echo "</td>";
-	      echo "<td>"; ?><div id="score<?php echo $row["id"]; ?>"> <?php echo $row['score']; ?> </div> <?php echo "</td>";
-	      echo "<td>"; ?><div id="fairways<?php echo $row["id"]; ?>"> <?php echo $row['fairways']; ?> </div> <?php echo "</td>";
-	      echo "<td>"; ?><div id="gir<?php echo $row["id"]; ?>"> <?php echo $row['gir']; ?> </div> <?php echo "</td>";
-	      echo "<td>"; ?><div id="sandsaves<?php echo $row["id"]; ?>"> <?php echo $row['sandsaves']; ?> </div> <?php echo "</td>";
-	      echo "<td>"; ?><div id="upanddowns<?php echo $row["id"]; ?>"> <?php echo $row['upanddowns']; ?> </div> <?php echo "</td>";
-	      echo "<td>"; ?><div id="putts<?php echo $row["id"]; ?>"> <?php echo $row['putts']; ?> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 158px" id="golfcourse<?php echo $row["id"]; ?>"> <?php echo $row['golfcourse']; ?> </div> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 160px" id="score<?php echo $row["id"]; ?>"> <?php echo $row['score']; ?> </div> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 160px" id="fairways<?php echo $row["id"]; ?>"> <?php echo $row['fairways']; ?> </div> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 160px" id="gir<?php echo $row["id"]; ?>"> <?php echo $row['gir']; ?> </div> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 160px" id="sandsaves<?php echo $row["id"]; ?>"> <?php echo $row['sandsaves']; ?> </div> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 160px" id="upanddowns<?php echo $row["id"]; ?>"> <?php echo $row['upanddowns']; ?> </div> <?php echo "</td>";
+	      echo "<td style=\"text-align: left; padding: 8px; border: 1px solid black;\">"; ?><div style="width: 111px" id="putts<?php echo $row["id"]; ?>"> <?php echo $row['putts']; ?> <?php echo "</td>";
 	      
 
 	      echo "<td>"; ?> 
