@@ -1,0 +1,29 @@
+table {
+	border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+    background-color: #4CAF50;
+	color: white;
+}
+
+.data {
+	text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+.golfcourse {
+	width: 158px;
+}
+
+.score, .fairways, .gir, .sandsaves, .upanddowns {
+	width: 160px;
+}
+
+.putts {
+	width: 111px;
+}
