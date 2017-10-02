@@ -24,11 +24,12 @@ else {
 <head>
   <meta charset="UTF-8">
   <title>Welcome <?= $first.' '.$last ?></title>
+  
 </head>
 
 <body>
   <div class="form">
-          <h1>Welcome</h1>
+          <h1><?= $first.' '.$last ?>'s Statistics</h1>
           
           <p>
           <?php 
@@ -61,7 +62,6 @@ else {
           
           ?>
           
-          <h2><?php echo $first.' '.$last; ?></h2>
           <p><?= $email ?></p>
 
   </div>
@@ -77,7 +77,7 @@ else {
   <input type="text" id="txtupanddownsins" placeholder="Up & Downs">
   <input type="text" id="txtputtsins" placeholder="Putts">
 
-  <input type="button" id="but1" value="insert" onclick="insert();">
+  <input type="button" class="insertBtn" id="but1" value="insert" onclick="insert();">
 </form>
 
 <a href="logout.php"><button class="button button-block" name="logout"/>Log Out</button></a>
@@ -106,37 +106,37 @@ else {
     golfcourseid = "golfcourse"+val;
     txtgolfcourseid = "txtgolfcourse"+val;
     var golfcourse = document.getElementById(golfcourseid).innerHTML;
-    document.getElementById(golfcourseid).innerHTML="<input type='text' value='"+golfcourse+"' id='"+txtgolfcourseid+"'>";
+    document.getElementById(golfcourseid).innerHTML="<input class='golfcourseedit' type='text' value='"+golfcourse+"' id='"+txtgolfcourseid+"'>";
 
     scoreid = "score"+val;
     txtscoreid = "txtscore"+val;
     var score = document.getElementById(scoreid).innerHTML;
-    document.getElementById(scoreid).innerHTML="<input type='text' value='"+score+"' id='"+txtscoreid+"'>";
+    document.getElementById(scoreid).innerHTML="<input class='scoreedit' type='text' value='"+score+"' id='"+txtscoreid+"'>";
 
     fairwaysid = "fairways"+val;
     txtfairwaysid = "txtfairways"+val;
     var fairways = document.getElementById(fairwaysid).innerHTML;
-    document.getElementById(fairwaysid).innerHTML="<input type='text' value='"+fairways+"' id='"+txtfairwaysid+"'>";
+    document.getElementById(fairwaysid).innerHTML="<input class='fairwaysedit' type='text' value='"+fairways+"' id='"+txtfairwaysid+"'>";
 
     girid = "gir"+val;
     txtgirid = "txtgir"+val;
     var gir = document.getElementById(girid).innerHTML;
-    document.getElementById(girid).innerHTML="<input type='text' value='"+gir+"' id='"+txtgirid+"'>";
+    document.getElementById(girid).innerHTML="<input class='giredit' type='text' value='"+gir+"' id='"+txtgirid+"'>";
 
     sandsavesid = "sandsaves"+val;
     txtsandsavesid = "txtsandsaves"+val;
     var sandsaves = document.getElementById(sandsavesid).innerHTML;
-    document.getElementById(sandsavesid).innerHTML="<input type='text' value='"+sandsaves+"' id='"+txtsandsavesid+"'>";
+    document.getElementById(sandsavesid).innerHTML="<input class='sandsavesedit' type='text' value='"+sandsaves+"' id='"+txtsandsavesid+"'>";
 
     upanddownsid = "upanddowns"+val;
     txtupanddownsid = "txtupanddowns"+val;
     var upanddowns = document.getElementById(upanddownsid).innerHTML;
-    document.getElementById(upanddownsid).innerHTML="<input type='text' value='"+upanddowns+"' id='"+txtupanddownsid+"'>";
+    document.getElementById(upanddownsid).innerHTML="<input class='upanddownsedit' type='text' value='"+upanddowns+"' id='"+txtupanddownsid+"'>";
 
     puttsid = "putts"+val;
     txtputtsid = "txtputts"+val;
     var putts = document.getElementById(puttsid).innerHTML;
-    document.getElementById(puttsid).innerHTML="<input type='text' value='"+putts+"' id='"+txtputtsid+"'>";
+    document.getElementById(puttsid).innerHTML="<input class='puttsedit' type='text' value='"+putts+"' id='"+txtputtsid+"'>";
 
     updateid = "update"+val;
     editid = "edit"+val;
@@ -210,11 +210,19 @@ else {
     var upanddowns = document.getElementById("txtupanddownsins").value;
     var putts = document.getElementById("txtputtsins").value;
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "update.php?gc="+gc+"&score="+score+"&fairways="+fairways+"&gir="+gir+
-      "&sandsaves="+sandsaves+"&upanddowns="+upanddowns+"&putts="+putts+"&status=insert",false);
-    xmlhttp.send(null);
-    disp_data();
+
+    if (gc != "") {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET", "update.php?gc="+gc+"&score="+score+"&fairways="+fairways+"&gir="+gir+
+        "&sandsaves="+sandsaves+"&upanddowns="+upanddowns+"&putts="+putts+"&status=insert",false);
+      xmlhttp.send(null);
+      disp_data();
+    }
+    else {
+      alert("Must enter in golf course");
+    }
+
+    
 
     document.getElementById("txtgolfcourseins").value = "";
     document.getElementById("txtscoreins").value = "";
@@ -227,8 +235,9 @@ else {
 
 </script>
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="js/index.js"></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+  <script src="js/index.js"></script>
 
 </body>
 </html>

@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="login.css" />
+	</head>
+</html>
 <?php 
 /* User login process, checks if user exists and password is correct */
 
@@ -10,7 +16,7 @@ $usercheck->execute();
 
 if ($usercheck->rowCount() == 0) {
 	// User doesn't exist
-	echo "User doesn't exist!";
+	echo "<div class=\"wrong\">User doesn't exist!</div>";
 }
 else {
 	// User exists

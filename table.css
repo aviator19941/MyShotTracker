@@ -1,5 +1,6 @@
 table {
 	border-collapse: collapse;
+	margin: 2px;
 }
 
 th {
@@ -8,6 +9,98 @@ th {
     border: 1px solid black;
     background-color: #4CAF50;
 	color: white;
+}
+
+.button.button-block {
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	background: #3498db;	
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 8px 18px 8px 18px;
+	text-decoration: none;
+	border-radius: 28px;
+	border: none;
+}
+
+#txtgolfcourseins {
+    padding: 5px 1px;
+    margin: 20px 0px;
+    box-sizing: border-box;
+}
+
+#txtscoreins, #txtfairwaysins, #txtgirins, #txtsandsavesins, #txtupanddownsins {
+	padding: 5px 0px;
+    margin: 20px 0px;
+    box-sizing: border-box;
+}
+
+#txtputtsins {
+    padding: 5px 0px;
+    margin: 20px 0px;
+    width: 127px;
+    box-sizing: border-box;
+}
+
+.updateBtn {
+	margin-left: -92px;
+	background-color: #4CAF50;
+	color: white;
+    font-weight: 800;
+    font-size: 93%;
+    border: none;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    background-color: #e60000;
+    color: white;
+    font-weight: 800;
+    font-size: 93%;
+    border: none;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.editBtn {
+	background-color: #FF8C00;
+	color: white;
+    font-weight: 800;
+    font-size: 93%;
+    border: none;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+}
+
+.insertBtn {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 900;
+    font-size: 100%;
+    padding: 3px 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.golfcourseedit {
+	width: 150px;
+}
+
+.scoreedit, .fairwaysedit, .giredit, .sandsavesedit, .upanddownsedit {
+	width: 152px;
+}
+
+.puttsedit {
+	width: 103px;
 }
 
 .data {
