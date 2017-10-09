@@ -11,11 +11,27 @@ th {
 	color: white;
 }
 
-.button.button-block {
+.logoutBtn {
 	position: fixed;
+	cursor: pointer;
 	right: 20px;
 	top: 20px;
 	background: #3498db;	
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 8px 18px 8px 18px;
+	text-decoration: none;
+	border-radius: 28px;
+	border: none;
+}
+
+.searchBtn {
+	position: fixed;
+	cursor: pointer;
+	right: 150px;
+	top: 20px;
+	background: #4CAF50;	
 	font-family: Arial;
 	color: #ffffff;
 	font-size: 20px;

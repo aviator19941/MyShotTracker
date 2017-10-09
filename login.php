@@ -3,6 +3,8 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="login.css" />
 	</head>
+
+
 </html>
 <?php 
 /* User login process, checks if user exists and password is correct */
@@ -16,7 +18,10 @@ $usercheck->execute();
 
 if ($usercheck->rowCount() == 0) {
 	// User doesn't exist
-	echo "<div class=\"wrong\">User doesn't exist!</div>";
+	echo '<div class="alert">
+  			<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> 
+  			<strong>User doesn\'t exist!</strong> Enter the correct username or register for an account.
+  		</div>';
 }
 else {
 	// User exists
@@ -37,8 +42,10 @@ else {
         header("location: profile.php");
 	}
 	else {
-	    $_SESSION['error'] = "You have entered wrong password, try again!";
-        header("location: error.php");
+        echo '<div class="alert">
+  				<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> 
+  				<strong>You have entered the wrong password, try again!</strong>  		
+  			</div>';
 	}
 
 }
