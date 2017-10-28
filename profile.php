@@ -80,7 +80,7 @@ else {
   <input type="button" class="insertBtn" id="but1" value="insert" onclick="insert();">
 </form>
 
-<a href="searchMembers.php"><button class="searchBtn" name="search">Add Friends</button>
+<a href="searchMembers.php"><button class="searchBtn" name="search">Search Friends</button></a>
 <a href="logout.php"><button class="logoutBtn" name="logout"/>Log Out</button></a>
 
 
