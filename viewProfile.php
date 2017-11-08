@@ -43,7 +43,7 @@
           <p><?= 'User id: '.$uid ?></p>
 
   		</div>
-  		<a href="searchMembers.php"><button class="searchBtn" name="search">Add to Friends</button></a>
+  		<a href="searchMembers.php?<?php echo $uid;?>"><button class="searchBtn" name="search">Request as Friend</button></a>
 
 	</body>
 </html>
