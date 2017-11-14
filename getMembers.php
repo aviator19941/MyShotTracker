@@ -9,9 +9,9 @@ $uid = $_SESSION['uid'];
 if (isset($_POST["query"])) {
 
 	$search = '%' . $_POST["query"] . '%';
-	$query = "SELECT * FROM users WHERE first LIKE ? OR last LIKE ? OR uid LIKE ?";
+	$sql = "SELECT * FROM users WHERE first LIKE ? OR last LIKE ? OR uid LIKE ?";
 
-	$data = $pdo->prepare($query);
+	$data = $pdo->prepare($sql);
 	$data->bindParam(1, $search);
 	$data->bindParam(2, $search);
 	$data->bindParam(3, $search);
@@ -21,6 +21,7 @@ if (isset($_POST["query"])) {
 
 	while($row = $data->fetch(PDO::FETCH_ASSOC)) {
 		// use span for user id so can use in viewProfile.php
+
 		if ($row['uid'] != $uid) {
 			$output .= '<li>'.$row['first']." ".$row['last']." ".'<span id="uid">'.$row['uid'].'</span>'.'</li>';
 		}

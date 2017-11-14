@@ -19,7 +19,12 @@ li:hover {
     padding: 20px;
     background-color: #4CAF50;
     color: white;
-    display: none;
+}
+
+.alertBad {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
 }
 
 .closebtn {

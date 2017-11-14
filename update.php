@@ -47,6 +47,7 @@ if ($status == "disp") {
 	      <input type="button" class="deleteBtn" id="delete<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="delete" onclick="deleteRow(this.name)">
 	      
 	      <?php echo "</td>";
+	      
 	      echo "<td>"; ?> 
 	      <input type="button" class="updateBtn" id="update<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="update" style="visibility: hidden" onclick="updateRow(this.name)"> 
 

@@ -80,9 +80,34 @@ else {
   <input type="button" class="insertBtn" id="but1" value="insert" onclick="insert();">
 </form>
 
-<a href="searchMembers.php"><button class="searchBtn" name="search">Search Friends</button></a>
-<a href="logout.php"><button class="logoutBtn" name="logout"/>Log Out</button></a>
+<a href="searchMembers.php"><button class="searchBtn" name="search">Search Members</button></a>
+<a href="logout.php"><button class="logoutBtn" name="logout">Log Out</button></a>
+<a href="pendingRequests.php"><button class="pendingRequestsBtn" name="pendingRequests">Pending Requests</button></a>
+<a href="leaderboards.php"><button class="leaderboardsBtn" name="leaderboards">Leaderboards</button></a>
 
+<div id="friendsList">
+  <h3>Your Friends</h3>
+  <?php 
+    
+    $sql2 = "SELECT * FROM friends WHERE friendRequest = 1 AND (friendUid = ? OR uid = ?)";
+
+    $query2 = $pdo->prepare($sql2);
+    $query2->bindParam(1, $uid);
+    $query2->bindParam(2, $uid);
+    $query2->execute();
+
+    if ($query2->rowCount() > 0) {
+      $results = $query2->fetchAll();
+
+      foreach($results as $row) {
+        echo $row['uid'].'<br>';
+      }
+    }
+    else {
+      echo "No friends yet";
+    }
+  ?>
+</div>
 
 <script type="text/javascript">
   disp_data();

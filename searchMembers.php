@@ -9,10 +9,10 @@
         
 	</head>
 	<body>
-		<div id="toggleAlert" class="alert">
+		<!--<div id="toggleAlert" class="alert">
   			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
   			<strong>Friend request pending.</strong>
-  		</div>
+  		</div>-->
 
   		<a href="profile.php"><button class="profileBtn" name="profile">My Profile</button></a>
 		<a href="pendingRequests.php"><button class="pendingRequestsBtn" name="pendingRequests"/>Pending Requests</button></a>
@@ -54,10 +54,10 @@
       			});  
  			});
 
-			var oldURL = document.referrer;
+			/*var oldURL = document.referrer;
 			if (oldURL != "" && oldURL != "http://localhost:1234/myshottracker/profile.php") {
 				document.getElementById("toggleAlert").style.display = "block";
-			}
+			}*/
 
  		</script>
 	</body>
@@ -74,13 +74,54 @@
 		if (isset($_SERVER["QUERY_STRING"]) && $_SERVER["QUERY_STRING"] != '') {
 			$friendUid = $_SERVER["QUERY_STRING"];
 
-			$sql = "INSERT INTO friends (friendUid, uid) VALUES (:friendUid, :uid)";
-
+			$sql = "SELECT * FROM friends";
 			$query = $pdo->prepare($sql);
-			$query->execute(array(
-				':friendUid' => $friendUid,
-				':uid' => $uid
-			));
+			$query->execute();
+			$count = 0;
+			if ($query->rowCount() > 0) {
+						
+				$results = $query->fetchAll();
+
+				foreach($results as $row) {
+					if (($uid == $row['friendUid'] && $row['uid'] == $friendUid) || ($friendUid == $row['friendUid'] && $uid == $row['uid'])) {
+						
+						echo '<div class="alertBad">
+					  			<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> 
+					  			<strong>'.$friendUid.' wants to friend you already!</strong>
+					  		</div>';
+						$count++;
+					}
+				}
+
+				if ($count == 0) {
+					echo '<div id="toggleAlert" class="alert">
+				  			<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> 
+				  			<strong>Friend request pending.</strong>
+				  		</div>';
+					$sql2 = "INSERT INTO friends (friendUid, uid) VALUES (:friendUid, :uid)";
+
+					$query2 = $pdo->prepare($sql2);
+					$query2->execute(array(
+						':friendUid' => $friendUid,
+						':uid' => $uid
+					));
+				}
+
+			}
+			else {
+				echo '<div id="toggleAlert" class="alert">
+				  			<span class="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span> 
+				  			<strong>Friend request pending.</strong>
+				  		</div>';
+				$sql2 = "INSERT INTO friends (friendUid, uid) VALUES (:friendUid, :uid)";
+
+				$query2 = $pdo->prepare($sql2);
+				$query2->execute(array(
+					':friendUid' => $friendUid,
+					':uid' => $uid
+				));
+			}
+			
 		}
 	}
 	else {

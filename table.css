@@ -41,6 +41,36 @@ th {
 	border: none;
 }
 
+.pendingRequestsBtn {
+    position: fixed;
+    cursor: pointer;
+    right: 365px;
+    top: 20px;
+    background: #D433FF;    
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 8px 18px 8px 18px;
+    text-decoration: none;
+    border-radius: 28px;
+    border: none;
+}
+
+.leaderboardsBtn {
+    position: fixed;
+    cursor: pointer;
+    right: 590px;
+    top: 20px;
+    background: #000066;    
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 8px 18px 8px 18px;
+    text-decoration: none;
+    border-radius: 28px;
+    border: none;
+}
+
 #txtgolfcourseins {
     padding: 5px 1px;
     margin: 20px 0px;
