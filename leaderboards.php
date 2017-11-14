@@ -13,19 +13,33 @@
 				include 'db.php';
 				session_start();
 				$uid = $_SESSION['uid'];
+				$first = $_SESSION['first'];
+				$last = $_SESSION['last'];
 
-				$sql = "SELECT * FROM friends WHERE friendRequest = 1 AND (friendUid = ? OR uid = ?)";
+    			$sql = "SELECT * FROM users U JOIN friends F ON U.uid = F.uid AND F.friendRequest = 1 WHERE F.friendUid = :uid";
 
-			    $query2 = $pdo->prepare($sql);
-			    $query2->bindParam(1, $uid);
-			    $query2->bindParam(2, $uid);
+			    $query = $pdo->prepare($sql);
+			    $query->bindParam(':uid', $uid);
+			    $query->execute();
+
+			    $sql2 = "SELECT * FROM users U JOIN friends F ON U.uid = F.friendUid AND F.friendRequest = 1 WHERE F.uid = :uid";
+
+			    $query2 = $pdo->prepare($sql2);
+			    $query2->bindParam(':uid', $uid);
 			    $query2->execute();
 
-			    if ($query2->rowCount() > 0) {
-			      $results = $query2->fetchAll();
+			    if ($query->rowCount() > 0) {
+			      $results = $query->fetchAll();
 
 			      foreach($results as $row) {
-			        echo $row['uid'].'<br>';
+			        echo 'Query 1: '.$row['first'].' '.$row['last'].' '.$row['uid'].'<br>';
+			      }
+			    }
+			    else if ($query2->rowCount() > 0) {
+			      $results2 = $query2->fetchAll();
+
+			      foreach($results2 as $row2) {
+			        echo 'Query 2: '.$row2['first'].' '.$row2['last'].' '.$row2['friendUid'].'<br>';
 			      }
 			    }
 			    else {
