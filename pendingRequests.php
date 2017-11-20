@@ -6,10 +6,13 @@
 
 	</head>
 	<body>
+		<a href="leaderboards.php"><button class="leaderboardsBtn" name="leaderboards">Leaderboards</button></a>
+		<a href="searchMembers.php"><button class="searchBtn" name="search">Search Members</button></a>
 		<a href="profile.php"><button class="profileBtn" name="profile">My Profile</button></a>
+		<a href="logout.php"><button class="logoutBtn" name="logout">Log Out</button></a>
 
 		<div class="outgoingRequests">
-			<h3>Outgoing Friend Requests</h3>
+			<h2>Outgoing Friend Requests</h2>
 			<?php 
 				include 'db.php';
 				session_start();
@@ -18,7 +21,7 @@
 
 					$uid = $_SESSION['uid'];
 
-					$sql = "SELECT U.first, U.last, F.uid AS fUid, F.friendUid FROM users U JOIN friends F ON U.uid = F.friendUid";
+					$sql = "SELECT U.first, U.last, F.uid AS fUid, F.friendUid, F.friendRequest FROM users U JOIN friends F ON U.uid = F.friendUid";
 
 					$query = $pdo->prepare($sql);
 
@@ -32,8 +35,7 @@
 
 						foreach($results as $row) {
 							//outgoing friend requests
-
-							if ($uid == $row['fUid']) {
+							if ($uid == $row['fUid'] && $row['friendRequest'] == 0) {
 								$friendUid = $row['friendUid'];
 								$friendFirst = $row['first'];
 								$friendLast = $row['last'];
@@ -56,7 +58,7 @@
 		</div>
 
 		<div class="incomingRequests">
-			<h3>Incoming Friend Requests</h3>
+			<h2>Incoming Friend Requests</h2>
 			<div id="disp_data"></div>
 		</div>
 

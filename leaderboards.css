@@ -1,4 +1,65 @@
 .addFriendsToLeaderboard {
 	float: right;
 	margin: 30px 200px 30px 0px;
+	overflow: hidden;
+}
+
+.leaderboardRequestsBtn {
+	position: fixed;
+	cursor: pointer;
+	right: 600px;
+	top: 20px;
+	background: #4CAF50;	
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 8px 18px 8px 18px;
+	text-decoration: none;
+	border-radius: 28px;
+	border: none;
+}
+
+.logoutBtn {
+	position: fixed;
+	cursor: pointer;
+	right: 20px;
+	top: 20px;
+	background: #3498db;	
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 8px 18px 8px 18px;
+	text-decoration: none;
+	border-radius: 28px;
+	border: none;
+}
+
+.searchBtn {
+	position: fixed;
+	cursor: pointer;
+	right: 150px;
+	top: 20px;
+	background: #4CAF50;	
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 20px;
+	padding: 8px 18px 8px 18px;
+	text-decoration: none;
+	border-radius: 28px;
+	border: none;
+}
+
+.pendingRequestsBtn {
+    position: fixed;
+    cursor: pointer;
+    right: 365px;
+    top: 20px;
+    background: #D433FF;    
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 8px 18px 8px 18px;
+    text-decoration: none;
+    border-radius: 28px;
+    border: none;
 }
