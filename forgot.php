@@ -63,6 +63,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
 <html>
 <head>
   <title>Reset Your Password</title>
+  <link rel="stylesheet" type="text/css" href="table.css" />
 </head>
 
 <body>
@@ -78,7 +79,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
       </label>
       <input type="text" required autocomplete="off" name="email"/>
     </div>
-    <button class="button button-block"/>Reset</button>
+    <button class="resetBtn"/>Reset</button>
     </form>
   </div>
           

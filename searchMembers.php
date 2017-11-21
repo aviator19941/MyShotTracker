@@ -16,6 +16,8 @@
 
   		<a href="profile.php"><button class="profileBtn" name="profile">My Profile</button></a>
 		<a href="pendingRequests.php"><button class="pendingRequestsBtn" name="pendingRequests"/>Pending Requests</button></a>
+		<a href="leaderboards.php"><button class="leaderboardsBtn" name="leaderboards">Leaderboards</button></a>
+		<a href="logout.php"><button class="logoutBtn" name="logout">Log Out</button></a>
 
 		<div class="container" style="width:500px;">  
             <label>Enter Member name</label>  

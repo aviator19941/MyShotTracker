@@ -79,10 +79,22 @@
 				if ($query->rowCount() > 1) {
 					$results = $query->fetchAll();
 
+					echo "<table>";
+					echo "<tr>";
+					echo "<th>First Name</th>";
+					echo "<th>Last Name</th>";
+					echo "<th>Average Score</th>";
+					echo "</tr>";
 					foreach($results as $row) {
-						echo $row['id'].' '.$row['first'].' '.$row['last'].' '.$row['avgScore'].'<br>';
-						
+						//echo $row['first'].' '.$row['last'].' '.$row['avgScore'].'<br>';
+						echo "<tr>";
+				      	echo "<td class=\"data\">"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['first']; ?> </div> <?php echo "</td>";
+				      	echo "<td class=\"data\">"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
+				      	echo "<td class=\"data\">"; ?><div id="avgScore<?php echo $row["id"]; ?>"> <?php echo $row['avgScore']; ?> </div> <?php echo "</td>";
+						echo "<tr>";
 					}
+					echo "</table>";
+					
 				}
 				else if ($query->rowCount() == 1) {
 					$sql2 = "SELECT * FROM users U JOIN leaderboards L ON U.uid = L.friendUid AND L.leaderboardRequest = 2 WHERE L.uid = ? ORDER BY L.avgScore";
@@ -92,9 +104,21 @@
 
 					$results2 = $query2->fetchAll();
 
+					echo "<table>";
+					echo "<tr>";
+					echo "<th>First Name</th>";
+					echo "<th>Last Name</th>";
+					echo "<th>Average Score</th>";
+					echo "</tr>";
 					foreach($results2 as $row2) {
-						echo $row2['id'].' '.$row2['first'].' '.$row2['last'].' '.$row2['avgScore'].'<br>';
+						//echo $row2['first'].' '.$row2['last'].' '.$row2['avgScore'].'<br>';
+						echo "<tr>";
+				      	echo "<td class=\"data\">"; ?><div id="first<?php echo $row2["id"]; ?>"> <?php echo $row2['first']; ?> </div> <?php echo "</td>";
+				      	echo "<td class=\"data\">"; ?><div id="last<?php echo $row2["id"]; ?>"> <?php echo $row2['last']; ?> </div> <?php echo "</td>";
+				      	echo "<td class=\"data\">"; ?><div id="avgScore<?php echo $row2["id"]; ?>"> <?php echo $row2['avgScore']; ?> </div> <?php echo "</td>";
+						echo "<tr>";
 					}
+					echo '</table>';
 				}
 				else {
 					echo 'Add friends to leaderboard';
