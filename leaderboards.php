@@ -33,7 +33,6 @@
 			      	}
 			    }
 			    else {
-
 					$sql = "INSERT INTO leaderboards (friendUid, uid, avgScore, leaderboardRequest) VALUES (:friendUid, :uid, :avgScore, :leaderboardRequest)";
 
 					$sql5 = "SELECT AVG(S.score) AS avgScore FROM users U JOIN stats S ON U.uid = S.uid WHERE S.uid = :uid";
@@ -75,10 +74,7 @@
 
 				$query = $pdo->prepare($sql);
 				$query->bindParam(1, $uid);
-				$query->bindParam(2, $uid);
 				$query->execute();
-
-
 
 				if ($query->rowCount() > 1) {
 					$results = $query->fetchAll();
@@ -89,7 +85,7 @@
 					}
 				}
 				else if ($query->rowCount() == 1) {
-					$sql2 = "SELECT * FROM users U JOIN leaderboards L ON U.uid = L.friendUid AND L.leaderboardRequest = 2 WHERE L.uid <> ? ORDER BY L.avgScore";
+					$sql2 = "SELECT * FROM users U JOIN leaderboards L ON U.uid = L.friendUid AND L.leaderboardRequest = 2 WHERE L.uid = ? ORDER BY L.avgScore";
 					$query2 = $pdo->prepare($sql2);
 					$query2->bindParam(1, $uid);
 					$query2->execute();

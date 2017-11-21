@@ -8,13 +8,13 @@
 
 	if ($status == "display") {
 		
-		$sql = "SELECT * FROM users U JOIN friends F ON U.uid = F.uid AND F.friendRequest = 1 WHERE F.friendUid = :uid";
+		$sql = "SELECT U.first, U.last, F.uid FROM users U JOIN friends F ON U.uid = F.uid AND F.friendRequest = 1 WHERE F.friendUid = :uid";
 
 	    $query = $pdo->prepare($sql);
 	    $query->bindParam(':uid', $uid);
 	    $query->execute();
 
-	    $sql2 = "SELECT * FROM users U JOIN friends F ON U.uid = F.friendUid AND F.friendRequest = 1 WHERE F.uid = :uid";
+	    $sql2 = "SELECT U.first, U.last, F.friendUid FROM users U JOIN friends F ON U.uid = F.friendUid AND F.friendRequest = 1 WHERE F.uid = :uid";
 
 	    $query2 = $pdo->prepare($sql2);
 	    $query2->bindParam(':uid', $uid);
@@ -24,14 +24,15 @@
 	      $results = $query->fetchAll();
 
 	      echo "<table>";
-
+	      
 	      foreach($results as $row) {
 	      	// CHECK IF IT SHOULD BE FRIENDUID OR JUST UID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	      	$sql7 = "SELECT * FROM leaderboards WHERE friendUid = :friendUid AND uid = :uid";
 	      	
+	      	$friendUid = $row['uid'];
 	      	$query7 = $pdo->prepare($sql7);
-	      	$query7->bindParam(':friendUid', $uid);
-	      	$query7->bindParam(':uid', $row['uid']);
+	      	$query7->bindParam(':friendUid', $friendUid);
+	      	$query7->bindParam(':uid', $uid);
 	      	$query7->execute();
 
 	      	if ($query7->rowCount() > 0) {
@@ -42,7 +43,7 @@
 						echo "<tr>";
 				      	echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['first']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
-				      	echo "<td>"; ?><div id="uid<?php echo $row7["id"]; ?>"> <?php echo $row7['uid']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="uid<?php echo $row["id"]; ?>"> <?php echo $row['uid']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?> 
 
 							<input type="button" class="addBtn" id="add<?php echo $row7["id"]; ?>" name="<?php echo $row7["id"]; ?>" value="add" onclick="addRow(this.name)"> 
@@ -51,18 +52,80 @@
 						
 						echo "<tr>";
 	      			}
+	      			else {
+	      				break;
+	      			}
 	      		}
 	      	}
+	      	else {
+	      		$sql8 = "SELECT * FROM users U JOIN friends F ON U.uid = F.friendUid AND F.friendRequest = 1 WHERE F.friendUid = :uid";
 
+	      		$query8 = $pdo->prepare($sql8);
+	      		$query8->bindParam(':uid', $uid);
+	      		$query8->execute();
+
+	      		
+	      		if ($query8->rowCount() > 0) {
+	      			$results8 = $query8->fetchAll();
+
+	      			foreach($results8 as $row8) {
+	      				//echo 'here: '.$row['first'].' '.$row['last'].' '.$row['friendUid'].' '.$row['uid'].'<br>';
+	      				//friendUid = aviator1, uid = aviator
+	      				$avgScore = 0;
+	      				
+				      	$sql4 = "INSERT INTO leaderboards (friendUid, uid, avgScore) VALUES (:friendUid, :uid, :avgScore)";
+
+				      	$sql5 = "SELECT AVG(S.score) AS avgScore FROM users U JOIN stats S ON U.uid = S.uid WHERE S.uid = :friendUid";
+				      	
+				      	$query5 = $pdo->prepare($sql5);
+				      	
+				      	$query5->bindParam(':friendUid', $friendUid);
+				      	$query5->execute();
+
+				      	if ($query5->rowCount() > 0) {
+				      		$results = $query5->fetchAll();
+
+				      		foreach($results as $row5) {
+				      			$avgScore = $row5['avgScore'];
+				      			if (is_null($avgScore)) 
+				      				$avgScore = 0;
+			      			}
+			      		}
+
+			      		$query4 = $pdo->prepare($sql4);
+				      	$query4->bindParam(':friendUid', $friendUid);
+				      	$query4->bindParam(':uid', $uid);
+				      	$query4->bindParam(':avgScore', $avgScore);
+				      	$query4->execute();
+
+
+				      	echo "<tr>";
+				      	echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['id'].' '.$row['first']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="uid<?php echo $row["id"]; ?>"> <?php echo $row['uid']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?> 
+
+							<input type="button" class="addBtn" id="add<?php echo $row8["id"]; ?>" name="<?php echo $row8["id"]; ?>" value="add" onclick="addRow(this.name)"> 
+
+						<?php echo "</td>";
+
+					
+						echo "<tr>";
+	      			}
+
+	      		}
+	      	}
 	      	
 	        //echo 'Query 1: '.$row['first'].' '.$row['last'].' '.$row['uid'].'<br>';
 	      }
+	      echo '</table>';
 	    }
-	    else if ($query2->rowCount() > 0) {
+	    
+	    if ($query2->rowCount() > 0) {
 	      $results2 = $query2->fetchAll();
 
 	      echo "<table>";
-
+	      
 	      foreach($results2 as $row2) {
 
 	      	$friendUid = $row2['friendUid'];
@@ -80,7 +143,7 @@
 			      		echo "<tr>";
 				      	echo "<td>"; ?><div id="first<?php echo $row2["id"]; ?>"> <?php echo $row2['first']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?><div id="last<?php echo $row2["id"]; ?>"> <?php echo $row2['last']; ?> </div> <?php echo "</td>";
-				      	echo "<td>"; ?><div id="friendUid<?php echo $row6["id"]; ?>"> <?php echo $row6['friendUid']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="friendUid<?php echo $row2["id"]; ?>"> <?php echo $row2['friendUid']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?> 
 
 							<input type="button" class="addBtn" id="add<?php echo $row6["id"]; ?>" name="<?php echo $row6["id"]; ?>" value="add" onclick="addRow(this.name)"> 

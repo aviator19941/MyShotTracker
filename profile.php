@@ -95,6 +95,13 @@ else {
     $query->bindParam(':uid', $uid);
     $query->execute();
 
+    /*$sql = "SELECT * FROM users U JOIN friends F ON U.uid = F.friendUid AND F.friendRequest = 1 WHERE F.friendUid = ? OR F.uid = ?";
+
+    $query = $pdo->prepare($sql);
+    $query->bindParam(1, $uid);
+    $query->bindParam(2, $uid);
+    $query->execute();*/
+
     $sql2 = "SELECT * FROM users U JOIN friends F ON U.uid = F.friendUid AND F.friendRequest = 1 WHERE F.uid = :uid";
 
     $query2 = $pdo->prepare($sql2);
@@ -108,7 +115,7 @@ else {
         echo 'Query 1: '.$row['first'].' '.$row['last'].' '.$row['uid'].'<br>';
       }
     }
-    else if ($query2->rowCount() > 0) {
+    if ($query2->rowCount() > 0) {
       $results2 = $query2->fetchAll();
 
       foreach($results2 as $row2) {
