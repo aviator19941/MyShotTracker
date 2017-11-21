@@ -100,7 +100,7 @@
 
 
 				      	echo "<tr>";
-				      	echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['id'].' '.$row['first']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['first']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?><div id="uid<?php echo $row["id"]; ?>"> <?php echo $row['uid']; ?> </div> <?php echo "</td>";
 				      	echo "<td>"; ?> 

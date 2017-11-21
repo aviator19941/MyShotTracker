@@ -7,7 +7,7 @@
 	$uid = $_SESSION['uid'];
 
 	if ($status == "disp") {
-		$sql = "SELECT L.id, U.first, U.last, L.uid AS lUid FROM users U JOIN leaderboards L ON U.uid = L.uid AND L.leaderboardRequest = 1 WHERE L.friendUid = :uid";
+		$sql = "SELECT L.id, U.first, U.last, L.uid AS lUid FROM users U JOIN leaderboards L ON U.uid = L.friendUid AND L.leaderboardRequest = 1 WHERE L.friendUid = :uid";
 		
 		$query = $pdo->prepare($sql);
 		$query->bindParam(':uid', $uid);
@@ -15,14 +15,14 @@
 
 		if ($query->rowCount() > 0) {
 			$results = $query->fetchAll();
-
+			echo 'Here1';
 			echo '<table>';
 
 			foreach ($results as $row) {
 				echo "<tr>";
 				echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['first']; ?> </div> <?php echo "</td>";
 				echo "<td>"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
-				echo "<td>"; ?><div id="lUid<?php echo $row["id"]; ?>"> <?php echo '('.$row['lUid'].') wants to invite you to their leaderboard!'; ?> </div> <?php echo "</td>";
+				echo "<td>"; ?><div id="lUid<?php echo $row["id"]; ?>"> <?php echo '('.$row['lUid'].') wants to add you to their leaderboard!'; ?> </div> <?php echo "</td>";
 				
 				echo "<td>"; ?> 
 					<input type="button" class="acceptBtn" id="accept<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="accept" onclick="acceptRow(this.name)"> 
@@ -32,6 +32,7 @@
 				
 				echo "<tr>";
 			}
+			echo '</table>';
 		}
 		else {
 			echo 'No leaderboard requests';

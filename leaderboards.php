@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>My Leaderboards</title>
-		<h1>My Leaderboards</h1>
+		<title>My Leaderboard</title>
+		<h1>My Leaderboard</h1>
 		<link rel="stylesheet" type="text/css" href="leaderboards.css" />
 	</head>
 	<body>

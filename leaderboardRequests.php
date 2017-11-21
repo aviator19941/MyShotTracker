@@ -21,7 +21,7 @@
 
 					$uid = $_SESSION['uid'];
 
-					$sql = "SELECT U.first, U.last, L.uid AS lUid, L.friendUid, L.leaderboardRequest FROM users U JOIN leaderboards L ON U.uid = L.friendUid";
+					$sql = "SELECT U.first, U.last, L.uid AS lUid, L.friendUid, L.leaderboardRequest FROM users U JOIN leaderboards L ON U.uid = L.friendUid AND L.leaderboardRequest = 1";
 
 					$query = $pdo->prepare($sql);
 
@@ -35,7 +35,7 @@
 
 						foreach($results as $row) {
 							//outgoing friend requests
-							if ($uid == $row['lUid'] && $row['leaderboardRequest'] == 1) {
+							if ($uid == $row['lUid']) {
 								$friendUid = $row['friendUid'];
 								$friendFirst = $row['first'];
 								$friendLast = $row['last'];
