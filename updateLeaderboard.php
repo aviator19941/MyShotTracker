@@ -27,17 +27,34 @@
 
 	      foreach($results as $row) {
 	      	// CHECK IF IT SHOULD BE FRIENDUID OR JUST UID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	      	echo "<tr>";
-	      	echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['first']; ?> </div> <?php echo "</td>";
-	      	echo "<td>"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
-	      	echo "<td>"; ?><div id="uid<?php echo $row["id"]; ?>"> <?php echo $row['uid']; ?> </div> <?php echo "</td>";
-	      	echo "<td>"; ?> 
+	      	$sql7 = "SELECT * FROM leaderboards WHERE friendUid = :friendUid AND uid = :uid";
+	      	
+	      	$query7 = $pdo->prepare($sql7);
+	      	$query7->bindParam(':friendUid', $uid);
+	      	$query7->bindParam(':uid', $row['uid']);
+	      	$query7->execute();
 
-				<input type="button" class="addBtn" id="add<?php echo $row["id"]; ?>" name="<?php echo $row["id"]; ?>" value="add" onclick="addRow(this.name)"> 
+	      	if ($query7->rowCount() > 0) {
+	      		$results7 = $query7->fetchAll();
 
-			<?php echo "</td>";
-			
-			echo "<tr>";
+	      		foreach($results7 as $row7) {
+	      			if ($row7['leaderboardRequest'] == 0) {
+						echo "<tr>";
+				      	echo "<td>"; ?><div id="first<?php echo $row["id"]; ?>"> <?php echo $row['first']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="last<?php echo $row["id"]; ?>"> <?php echo $row['last']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?><div id="uid<?php echo $row7["id"]; ?>"> <?php echo $row7['uid']; ?> </div> <?php echo "</td>";
+				      	echo "<td>"; ?> 
+
+							<input type="button" class="addBtn" id="add<?php echo $row7["id"]; ?>" name="<?php echo $row7["id"]; ?>" value="add" onclick="addRow(this.name)"> 
+
+						<?php echo "</td>";
+						
+						echo "<tr>";
+	      			}
+	      		}
+	      	}
+
+	      	
 	        //echo 'Query 1: '.$row['first'].' '.$row['last'].' '.$row['uid'].'<br>';
 	      }
 	    }
@@ -85,9 +102,7 @@
 		      	$sql4 = "INSERT INTO leaderboards (friendUid, uid, avgScore) VALUES (:friendUid, :uid, :avgScore)";
 
 		      	$sql5 = "SELECT AVG(S.score) AS avgScore FROM users U JOIN stats S ON U.uid = S.uid WHERE S.uid = :friendUid";
-
-
-		      	$query4 = $pdo->prepare($sql4);
+		      	
 		      	$query5 = $pdo->prepare($sql5);
 
 		      	$query5->bindParam(':friendUid', $friendUid);
@@ -98,9 +113,12 @@
 
 		      		foreach($results as $row5) {
 		      			$avgScore = $row5['avgScore'];
+		      			if (is_null($avgScore)) 
+		      				$avgScore = 0;
 	      			}
 	      		}
 
+	      		$query4 = $pdo->prepare($sql4);
 		      	$query4->bindParam(':friendUid', $friendUid);
 		      	$query4->bindParam(':uid', $uid);
 		      	$query4->bindParam(':avgScore', $avgScore);
