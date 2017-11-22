@@ -112,14 +112,14 @@ else {
       $results = $query->fetchAll();
 
       foreach($results as $row) {
-        echo 'Query 1: '.$row['first'].' '.$row['last'].' '.$row['uid'].'<br>';
+        echo $row['first'].' '.$row['last'].' '.$row['uid'].'<br>';
       }
     }
     if ($query2->rowCount() > 0) {
       $results2 = $query2->fetchAll();
 
       foreach($results2 as $row2) {
-        echo 'Query 2: '.$row2['first'].' '.$row2['last'].' '.$row2['friendUid'].'<br>';
+        echo $row2['first'].' '.$row2['last'].' '.$row2['friendUid'].'<br>';
       }
     }
     else {
